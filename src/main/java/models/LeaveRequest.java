@@ -7,12 +7,15 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "leaverequest")
 public class LeaveRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     private LocalDate startDate;
+    @Column(unique = true, nullable = false)
     private LocalDate endDate;
     private String reason;
 

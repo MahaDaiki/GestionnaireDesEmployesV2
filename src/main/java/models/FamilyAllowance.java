@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "famillyallowance")
 public class FamilyAllowance {
 
 

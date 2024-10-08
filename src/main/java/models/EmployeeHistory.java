@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "employeehistory")
 public class EmployeeHistory {
 
     @Id
@@ -13,7 +14,7 @@ public class EmployeeHistory {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
-    private Employee employee; // Link to Employee
+    private Employee employee;
 
     private String fieldChanged;
     private String oldValue;

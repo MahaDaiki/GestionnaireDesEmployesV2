@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@DiscriminatorValue("Candidate")
+@Table(name = "candidate")
+
 public class Candidate extends Users {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long candidateId;
+    @Column(nullable = false)
     private String skills;
+    @Column(unique = true, nullable = false)
     private String socialSecurityNum;
 
 
@@ -18,19 +18,13 @@ public class Candidate extends Users {
         super();
     }
 
-    public Candidate(Long candidateId ,String name, String email, String phoneNumber, String password, LocalDate birthdate, String skills, String socialSecurityNum) {
+    public Candidate( String name, String email, String phoneNumber, String password, LocalDate birthdate, String skills, String socialSecurityNum) {
         super(name, email, phoneNumber, password, birthdate);
-        this.candidateId = candidateId;
         this.skills = skills;
         this.socialSecurityNum = socialSecurityNum;
     }
 
-    public Long getCandidateId() {
-        return candidateId;
-    }
-    public void setCandidateId(Long candidateId) {
-        this.candidateId = candidateId;
-    }
+
     @Override
     public LocalDate getBirthdate() {
         return super.getBirthdate();

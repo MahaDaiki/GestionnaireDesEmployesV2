@@ -2,10 +2,13 @@ package models;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@DiscriminatorValue("Admin")
+@Table(name = "admin")
+
+
 public class Admin extends Users{
 
     public Admin() {

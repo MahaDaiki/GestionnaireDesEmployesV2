@@ -4,18 +4,21 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "employee")
 public class Employee extends Users {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeId;
-
+    @Column(unique = true, nullable = false)
     private String socialSecurityNum;
+    @Column(nullable = false)
     private LocalDate hiringDate;
+    @Column(nullable = false)
     private String position;
+    @Column(nullable = false)
     private String department;
     private int leaveDays;
+    @Column(nullable = false)
     private double salary;
+
     private int childCount;
 
 
@@ -39,13 +42,7 @@ public class Employee extends Users {
 
 
 
-    public Long getEmployeeId() {
-        return employeeId;
-    }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
-    }
 
     public String getSocialSecurityNum() {
         return socialSecurityNum;

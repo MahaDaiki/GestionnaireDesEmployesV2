@@ -3,18 +3,26 @@ package models;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", allocationSize = 1)
     private Long id;
 
     private String name;
+
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private LocalDate birthdate;
 
 
