@@ -19,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeServiceInt {
 
     @Override
     public Employee findEmployeeById(Long id) {
-        return null;
+        return EmployeeDao.findEmployeeById(id);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeServiceInt {
 
     @Override
     public void updateEmployee(Employee employee) {
-
+        EmployeeDao.updateEmployee(employee);
     }
 
     @Override

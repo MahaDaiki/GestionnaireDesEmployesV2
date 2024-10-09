@@ -18,8 +18,8 @@ public class Candidate extends Users {
         super();
     }
 
-    public Candidate( String name, String email, String phoneNumber, String password, LocalDate birthdate, String skills, String socialSecurityNum) {
-        super(name, email, phoneNumber, password, birthdate);
+    public Candidate( String name, String email, String phone_number, String password, LocalDate birthdate, String skills, String socialSecurityNum) {
+        super(name, email, phone_number, password, birthdate);
         this.skills = skills;
         this.socialSecurityNum = socialSecurityNum;
     }
