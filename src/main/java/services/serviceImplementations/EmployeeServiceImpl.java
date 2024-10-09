@@ -34,6 +34,7 @@ public class EmployeeServiceImpl implements EmployeeServiceInt {
 
     @Override
     public void deleteEmployee(Long id) {
+        EmployeeDao.deleteEmployee(id);
 
     }
 }
