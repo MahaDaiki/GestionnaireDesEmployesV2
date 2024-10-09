@@ -36,7 +36,20 @@ public class EmployeeDAOImpl implements EmployeeDAOInterface {
 
     @Override
     public Employee findEmployeeById(Long id) {
-        return null;
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            Employee employee = entityManager.find(Employee.class, id);
+            transaction.commit();
+            return employee;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     @Override
@@ -46,11 +59,23 @@ public class EmployeeDAOImpl implements EmployeeDAOInterface {
 
     @Override
     public void updateEmployee(Employee employee) {
-
+        EntityTransaction transaction = entityManager.getTransaction();
+        try{
+            transaction.begin();
+            entityManager.merge(employee);
+            transaction.commit();
+        }
+        catch(Exception e){
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public void deleteEmployee(Long id) {
+
 
     }
 }

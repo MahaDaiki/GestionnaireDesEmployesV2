@@ -1,10 +1,13 @@
 package models;
 
+import listeners.EmployeeListener;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "employee")
+@EntityListeners(EmployeeListener.class)
 public class Employee extends Users {
 
     @Column(unique = true, nullable = false)
@@ -27,10 +30,10 @@ public class Employee extends Users {
     }
 
 
-    public Employee(String name, String email, String phoneNumber, String password, LocalDate birthdate,
+    public Employee(String name, String email, String phone_number, String password, LocalDate birthdate,
                     String socialSecurityNum, LocalDate hiringDate, String position, String department,
                     int leaveDays, double salary, int childCount) {
-        super(name, email, phoneNumber, password, birthdate);
+        super(name, email, phone_number, password, birthdate);
         this.socialSecurityNum = socialSecurityNum;
         this.hiringDate = hiringDate;
         this.position = position;
