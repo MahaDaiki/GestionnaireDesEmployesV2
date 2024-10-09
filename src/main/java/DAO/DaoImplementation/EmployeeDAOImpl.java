@@ -54,7 +54,18 @@ public class EmployeeDAOImpl implements EmployeeDAOInterface {
 
     @Override
     public List<Employee> findAllEmployees() {
-        return Collections.emptyList();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            List<Employee> employees = entityManager.createQuery("SELECT e FROM Employee e", Employee.class).getResultList();
+            transaction.commit();
+            return employees;
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
@@ -75,6 +86,24 @@ public class EmployeeDAOImpl implements EmployeeDAOInterface {
 
     @Override
     public void deleteEmployee(Long id) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        try{
+            transaction.begin();
+            Employee employee = entityManager.find(Employee.class, id);
+            if (employee != null) {
+                entityManager.remove(employee);
+            } else {
+                System.out.println("Employee with ID " + id + " does not exist.");
+            }
+
+            transaction.commit();
+        }
+        catch(Exception e){
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
 
 
     }
