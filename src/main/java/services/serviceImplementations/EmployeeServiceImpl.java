@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeServiceInt {
 
     @Override
     public List<Employee> findAllEmployees() {
-        return Collections.emptyList();
+        return EmployeeDao.findAllEmployees();
     }
 
     @Override
