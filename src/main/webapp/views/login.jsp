@@ -1,0 +1,45 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: AMD
+  Date: 10/10/2024
+  Time: 21:28
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"><
+</head>
+<body>
+
+<div class="image-container"></div>
+
+<div class="form-container">
+    <div class="login-form">
+        <h2>Login</h2>
+
+        <%
+            String message = (String) request.getAttribute("message");
+            if (message != null) {
+        %>
+        <div class="alert"><%= message %></div>
+        <%
+            }
+        %>
+
+        <form action="auth/login" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
