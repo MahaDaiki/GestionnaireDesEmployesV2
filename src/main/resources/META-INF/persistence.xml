@@ -7,9 +7,9 @@
     <persistence-unit name="my-persistence-unit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- List your entity classes here -->
+
         <class>models.Users</class>
-        <!-- <class>models.Employee</class>
+         <class>models.Employee</class>
          <class>models.Admin</class>
          <class>models.Recruiter</class>
          <class>models.Candidate</class>
@@ -17,7 +17,7 @@
          <class>models.LeaveRequest</class>
          <class>models.EmployeeHistory</class>
          <class>models.CandidateJobOffer</class>
-         <class>models.FamilyAllowance</class> -->
+         <class>models.FamilyAllowance</class>
 
          <properties>
              <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
