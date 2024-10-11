@@ -10,12 +10,11 @@ import services.serviceInterfaces.AuthenticationServiceInt;
 import javax.servlet.http.HttpSession;
 
 public class AuthenticationServiceImpl implements AuthenticationServiceInt {
-  private AuthenticationDAOImpl authenticationDao;
+    private AuthenticationDAOImpl authenticationDao;
 
-    public AuthenticationServiceImpl() {
+    public AuthenticationServiceImpl(AuthenticationDAOImpl authenticationDao) {
         this.authenticationDao = authenticationDao;
     }
-
 
 
     @Override

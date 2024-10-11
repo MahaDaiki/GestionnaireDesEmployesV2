@@ -1,5 +1,7 @@
 package controllers;
 
+import DAO.DaoImplementation.AuthenticationDAOImpl;
+import configs.JpaUtil;
 import models.Admin;
 import models.Candidate;
 import models.Employee;
@@ -7,6 +9,7 @@ import models.Recruiter;
 import services.serviceImplementations.AuthenticationServiceImpl;
 import services.serviceInterfaces.AuthenticationServiceInt;
 
+import javax.persistence.EntityManager;
 import javax.servlet.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,16 +20,25 @@ import java.io.IOException;
 
 public class AuthenticationServlet extends HttpServlet {
 
-    private AuthenticationServiceInt authenticationService;
+    private AuthenticationServiceImpl authenticationService;
 
     @Override
     public void init() throws ServletException {
-        authenticationService = new AuthenticationServiceImpl();
+        EntityManager entityManager = JpaUtil.getEntityManager();
+        AuthenticationDAOImpl authenticationDao = new AuthenticationDAOImpl(entityManager);
+        authenticationService = new AuthenticationServiceImpl(authenticationDao);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+
+        if (action == null) {
+            request.setAttribute("message", "Unknown action");
+            request.getRequestDispatcher("views/login.jsp").forward(request, response);
+            return;
+        }
 
         switch (action) {
             case "login":
@@ -46,10 +58,12 @@ public class AuthenticationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
+        if (action == null || action.equals("login")) {
+            request.getRequestDispatcher("views/login.jsp").forward(request, response);
+            return;
+        }
+
         switch (action) {
-            case "login":
-                request.getRequestDispatcher("views/login.jsp").forward(request, response);
-                break;
             case "logout":
                 handleLogout(request, response);
                 break;
@@ -81,37 +95,34 @@ public class AuthenticationServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", admin);
             session.setAttribute("role", "ADMIN");
-            response.sendRedirect("/auth/dashboardadmin");
+
+            response.sendRedirect("views/admindashboard.jsp");  // Ensure this path is correct
             return;
         }
-
-        // Check for Employee login
         Employee employee = authenticationService.loginAsEmployee(email, password);
         if (employee != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", employee);
             session.setAttribute("role", "EMPLOYEE");
-            response.sendRedirect("/auth/dashboardemployee");
+            response.sendRedirect("auth?action=dashboardemployee");
             return;
         }
 
-        // Check for Recruiter login
         Recruiter recruiter = authenticationService.loginAsRecruiter(email, password);
         if (recruiter != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", recruiter);
             session.setAttribute("role", "RECRUITER");
-            response.sendRedirect("/auth/dashboardrecruiter");
+            response.sendRedirect("auth?action=dashboardrecruiter");
             return;
         }
 
-        // Check for Candidate login
         Candidate candidate = authenticationService.loginAsCandidate(email, password);
         if (candidate != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", candidate);
             session.setAttribute("role", "CANDIDATE");
-            response.sendRedirect("/auth/dashboardcandidate");
+            response.sendRedirect("auth?action=dashboardcandidate");
             return;
         }
 
