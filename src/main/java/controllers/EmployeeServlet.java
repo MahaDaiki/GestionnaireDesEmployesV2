@@ -1,9 +1,14 @@
 package controllers;
 
 import DAO.DaoImplementation.EmployeeDAOImpl;
+import DAO.DaoImplementation.FamilyAllowanceDAOImpl;
+import configs.JpaUtil;
 import models.Employee;
+import models.FamilyAllowance;
 import services.serviceImplementations.EmployeeServiceImpl;
+import services.serviceImplementations.FamilyAllowanceServiceImpl;
 
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +26,14 @@ import static org.hibernate.internal.util.StringHelper.isEmpty;
 public class EmployeeServlet extends HttpServlet {
 
     private EmployeeServiceImpl employeeService;
+    private FamilyAllowanceServiceImpl familyAllowanceService;
 
     @Override
     public void init() {
         employeeService = new EmployeeServiceImpl( new EmployeeDAOImpl( ));
+
+
+        familyAllowanceService = new FamilyAllowanceServiceImpl(new FamilyAllowanceDAOImpl());
     }
 
     @Override
@@ -123,7 +132,12 @@ public class EmployeeServlet extends HttpServlet {
         System.out.println(employee);
 
        employeeService.createEmployee(employee);
+        double totalSalary = familyAllowanceService.calculateFamilyAllowance(employee);
 
+
+        FamilyAllowance familyAllowance = new FamilyAllowance(employee, totalSalary);
+        familyAllowanceService. createFamilyAllowance(familyAllowance);
+        System.out.println(familyAllowance);
         response.sendRedirect("employees?action=add");
     }
 

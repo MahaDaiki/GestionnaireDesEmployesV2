@@ -12,8 +12,8 @@
 </head>
 <body>
 
-<a href="employees?action=add" class="button">Add Employee</a>
-
+<a href="${pageContext.request.contextPath}/admin" class="nav-button">View Leave Requests</a>
+<a href="${pageContext.request.contextPath}/employees?action=add" class="button">Add Employee</a>
 
 </body>
 </html>

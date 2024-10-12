@@ -48,6 +48,14 @@ public class FamilyAllowance {
         this.totalSalary = totalSalary;
     }
 
+    @Override
+    public String toString() {
+        return "FamilyAllowance{" +
+                "id=" + id +
+                ", employee=" + (employee != null ? employee.getName() : "null") +  // Assuming Employee has a getName() method
+                ", totalSalary=" + totalSalary +
+                '}';
+    }
 }
 
 
