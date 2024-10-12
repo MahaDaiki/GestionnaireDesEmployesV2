@@ -12,14 +12,6 @@
   <display-name>Archetype Created Web Application</display-name>
 
 
-  <servlet>
-    <servlet-name>AuthenticationServlet</servlet-name>
-    <servlet-class>controllers.AuthenticationServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AuthenticationServlet</servlet-name>
-    <url-pattern>/auth/*</url-pattern>
-  </servlet-mapping>
 
   <welcome-file-list>
     <welcome-file>views/login.jsp</welcome-file>

@@ -1,41 +1,44 @@
 package DAO.DaoImplementation;
 
 import DAO.DaoIntferfaces.EmployeeDAOInterface;
+import configs.JpaUtil;
 import models.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
-import java.util.Collections;
+import javax.persistence.Persistence;
 import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAOInterface {
-    private EntityManager entityManager;
 
-    public EmployeeDAOImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
 
-    }
+
+
     @Override
     public void createEmployee(Employee employee) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-        try{
+        try {
             transaction.begin();
             entityManager.persist(employee);
             transaction.commit();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
             throw e;
+        } finally {
+            if (entityManager != null && entityManager.isOpen()) {
+                entityManager.close();
+            }
         }
-
-
     }
+
+
 
     @Override
     public Employee findEmployeeById(Long id) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -54,6 +57,7 @@ public class EmployeeDAOImpl implements EmployeeDAOInterface {
 
     @Override
     public List<Employee> findAllEmployees() {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -70,6 +74,7 @@ public class EmployeeDAOImpl implements EmployeeDAOInterface {
 
     @Override
     public void updateEmployee(Employee employee) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try{
             transaction.begin();
@@ -86,6 +91,7 @@ public class EmployeeDAOImpl implements EmployeeDAOInterface {
 
     @Override
     public void deleteEmployee(Long id) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try{
             transaction.begin();

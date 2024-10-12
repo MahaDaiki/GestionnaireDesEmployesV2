@@ -11,7 +11,6 @@ import java.time.LocalDate;
 public class maintest {
     public static void main(String[] args) {
 //        EntityManager em = JpaUtil.getEntityManager();
-//
 //        try {
 //            if (em.isOpen()) {
 //                System.out.println("Connection to the database established successfully!");
@@ -51,7 +50,7 @@ public class maintest {
 //        } catch (Exception e) {
 //            System.out.println("Error occurred while creating the employee: " + e.getMessage());
 //        }
-//
+
 //        // Modify the existing Employee
 //        newEmployee.setPosition("Senior Software Engineer");
 //        newEmployee.setSalary(40000.00); // Updating salary

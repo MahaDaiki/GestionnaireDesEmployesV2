@@ -4,37 +4,37 @@ import DAO.DaoImplementation.EmployeeDAOImpl;
 import models.Employee;
 import services.serviceInterfaces.EmployeeServiceInt;
 
-import java.util.Collections;
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeServiceInt {
-    private EmployeeDAOImpl EmployeeDao;
-    public EmployeeServiceImpl(EmployeeDAOImpl EmployeeDao) {
-        this.EmployeeDao = EmployeeDao;
+    private EmployeeDAOImpl employeeDao;
+
+    public EmployeeServiceImpl(EmployeeDAOImpl employeeDAO) {
+        this.employeeDao = employeeDAO;
     }
+
     @Override
     public void createEmployee(Employee employee) {
-        EmployeeDao.createEmployee(employee);
+        employeeDao.createEmployee(employee);
     }
 
     @Override
     public Employee findEmployeeById(Long id) {
-        return EmployeeDao.findEmployeeById(id);
+        return employeeDao.findEmployeeById(id);
     }
 
     @Override
     public List<Employee> findAllEmployees() {
-        return EmployeeDao.findAllEmployees();
+        return employeeDao.findAllEmployees();
     }
 
     @Override
     public void updateEmployee(Employee employee) {
-        EmployeeDao.updateEmployee(employee);
+        employeeDao.updateEmployee(employee);
     }
 
     @Override
     public void deleteEmployee(Long id) {
-        EmployeeDao.deleteEmployee(id);
-
+        employeeDao.deleteEmployee(id);
     }
 }

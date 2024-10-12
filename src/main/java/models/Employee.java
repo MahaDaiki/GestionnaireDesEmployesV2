@@ -4,6 +4,8 @@ import listeners.EmployeeListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -23,6 +25,9 @@ public class Employee extends Users {
     private double salary;
 
     private int childCount;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EmployeeHistory> employeeHistories = new ArrayList<>();
+
 
 
     public Employee() {
@@ -90,6 +95,17 @@ public class Employee extends Users {
         this.childCount = childCount;
     }
 
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "socialSecurityNum='" + socialSecurityNum + '\'' +
+                ", hiringDate=" + hiringDate +
+                ", position='" + position + '\'' +
+                ", department='" + department + '\'' +
+                ", leaveDays=" + leaveDays +
+                ", salary=" + salary +
+                ", childCount=" + childCount +
+                '}';
+    }
 }
 

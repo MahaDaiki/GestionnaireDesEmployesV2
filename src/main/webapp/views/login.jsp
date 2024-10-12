@@ -20,6 +20,8 @@
 
 <div class="image-container"></div>
 
+
+
 <div class="form-container">
     <div class="login-form">
         <h2>Login</h2>
@@ -34,7 +36,7 @@
         %>
 
         <form action="auth" method="POST">
-            <input type="hidden" name="action" value="login"> <!-- Hidden input field for the action -->
+            <input type="hidden" name="action" value="login">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>

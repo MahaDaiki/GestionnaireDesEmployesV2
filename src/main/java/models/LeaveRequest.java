@@ -23,7 +23,7 @@ public class LeaveRequest {
     private LeaveRequestStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
 
@@ -75,5 +75,15 @@ public class LeaveRequest {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "LeaveRequest{" +
+                "id=" + id +
+                ", employee=" + (employee != null ? employee.getId() : "null") + // Assuming Employee has getId()
+                ", reason='" + reason + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", status=" + status +
+                '}';
+    }
 }

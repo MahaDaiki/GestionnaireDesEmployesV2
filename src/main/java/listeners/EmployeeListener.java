@@ -67,5 +67,6 @@ public class EmployeeListener {
         history.setChangeDate(LocalDate.now());
 
         entityManager.persist(history);
+
     }
 }

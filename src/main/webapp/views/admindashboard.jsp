@@ -12,5 +12,8 @@
 </head>
 <body>
 
+<a href="employees?action=add" class="button">Add Employee</a>
+
+
 </body>
 </html>

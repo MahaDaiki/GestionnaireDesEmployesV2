@@ -12,12 +12,13 @@ import services.serviceInterfaces.AuthenticationServiceInt;
 import javax.persistence.EntityManager;
 import javax.servlet.*;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
+@WebServlet("/auth")
 public class AuthenticationServlet extends HttpServlet {
 
     private AuthenticationServiceImpl authenticationService;
@@ -96,7 +97,7 @@ public class AuthenticationServlet extends HttpServlet {
             session.setAttribute("user", admin);
             session.setAttribute("role", "ADMIN");
 
-            response.sendRedirect("views/admindashboard.jsp");  // Ensure this path is correct
+            response.sendRedirect("views/admindashboard.jsp");
             return;
         }
         Employee employee = authenticationService.loginAsEmployee(email, password);
@@ -143,6 +144,8 @@ public class AuthenticationServlet extends HttpServlet {
     private void handleAdminDashboard(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         if (session != null && "ADMIN".equals(session.getAttribute("role"))) {
+            Admin admin = (Admin) session.getAttribute("user");
+            request.setAttribute("user", admin);
             request.getRequestDispatcher("views/admindashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("message", "Access Denied. Admins only.");
@@ -153,6 +156,8 @@ public class AuthenticationServlet extends HttpServlet {
     private void handleEmployeeDashboard(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         if (session != null && "EMPLOYEE".equals(session.getAttribute("role"))) {
+            Employee employee = (Employee) session.getAttribute("user");
+            request.setAttribute("user", employee);
             request.getRequestDispatcher("views/employeedashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("message", "Access Denied. Employees only.");
@@ -163,6 +168,8 @@ public class AuthenticationServlet extends HttpServlet {
     private void handleRecruiterDashboard(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         if (session != null && "RECRUITER".equals(session.getAttribute("role"))) {
+            Recruiter recruiter = (Recruiter) session.getAttribute("user");
+            request.setAttribute("user", recruiter);
             request.getRequestDispatcher("views/recruiterdashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("message", "Access Denied. Recruiters only.");
@@ -173,6 +180,8 @@ public class AuthenticationServlet extends HttpServlet {
     private void handleCandidateDashboard(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         if (session != null && "CANDIDATE".equals(session.getAttribute("role"))) {
+            Candidate candidate = (Candidate) session.getAttribute("user");
+            request.setAttribute("user", candidate);
             request.getRequestDispatcher("views/candidatedashboard.jsp").forward(request, response);
         } else {
             request.setAttribute("message", "Access Denied. Candidates only.");

@@ -1,6 +1,7 @@
 package DAO.DaoImplementation;
 
 import DAO.DaoIntferfaces.LeaveRequestDAOInt;
+import configs.JpaUtil;
 import enums.LeaveRequestStatus;
 import models.LeaveRequest;
 
@@ -17,8 +18,10 @@ public class LeaveRequestDAOImpl implements LeaveRequestDAOInt {
     }
     @Override
     public void createLeaveRequest(LeaveRequest leaveRequest) {
-        leaveRequest.setStatus(LeaveRequestStatus.PENDING);
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
+        leaveRequest.setStatus(LeaveRequestStatus.PENDING);
+
         try{
             transaction.begin();
             entityManager.persist(leaveRequest);
@@ -35,7 +38,9 @@ public class LeaveRequestDAOImpl implements LeaveRequestDAOInt {
 
     @Override
     public LeaveRequest findLeaveRequestById(Long id) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
+
         try {
             transaction.begin();
             LeaveRequest leaveRequest = entityManager.find(LeaveRequest.class, id);
@@ -52,7 +57,9 @@ public class LeaveRequestDAOImpl implements LeaveRequestDAOInt {
 
     @Override
     public List<LeaveRequest> findAllLeaveRequests() {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
+
         try {
             transaction.begin();
             TypedQuery<LeaveRequest> query = entityManager.createQuery("SELECT lr FROM LeaveRequest lr", LeaveRequest.class);
@@ -69,6 +76,7 @@ public class LeaveRequestDAOImpl implements LeaveRequestDAOInt {
 
     @Override
     public void updateLeaveRequestStatus(Long id, LeaveRequestStatus status) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -88,6 +96,7 @@ public class LeaveRequestDAOImpl implements LeaveRequestDAOInt {
 
     @Override
     public List<LeaveRequest> findLeaveRequestsByEmployeeId(Long employeeId) {
+        EntityManager entityManager = JpaUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
