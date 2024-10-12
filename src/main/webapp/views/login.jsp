@@ -14,13 +14,15 @@
     <title>Login</title>
     <link rel="stylesheet" href="assets/css/Style.css">
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"><
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+<nav>   <h1> GEV2 </h1> </nav>
 
-<div class="image-container"></div>
-
-
+<div class="loginpage" >
+    <div class="image-container">
+        <img src="assets/images/pic1.jpg" alt="Login Image">
+    </div>
 
 <div class="form-container">
     <div class="login-form">
@@ -45,6 +47,6 @@
 
     </div>
 </div>
-
+</div>
 </body>
 </html>

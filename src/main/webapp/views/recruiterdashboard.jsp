@@ -8,27 +8,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/Style.css">
+    <title>Recruiter Dashboard</title>
 </head>
 <body>
+<div class="form-offer">
 <form action="createJobOffer" method="post">
-    <div>
+    <div class="input-group">
         <label for="jobTitle">Job Title:</label>
         <input type="text" id="jobTitle" name="jobTitle" required>
     </div>
-    <div>
+    <div class="input-group">
         <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea>
     </div>
-    <div>
+    <div class="input-group">
         <label for="requirements">Requirements:</label>
         <textarea id="requirements" name="requirements" required></textarea>
-    </div>
-    <div>
+    </div >
+    <div class="input-group">
         <input type="submit" value="Create Job Offer">
     </div>
 </form>
-
+</div>
 
 </body>
 </html>

@@ -39,7 +39,12 @@
     </style>
 </head>
 <body>
-
+<nav>   <h1> GEV2 </h1>
+    <form action="${pageContext.request.contextPath}/auth" method="POST">
+    <input type="hidden" name="action" value="logout">
+    <button type="submit">Logout</button>
+</form>
+</nav>
 <div class="button-container">
     <a href="${pageContext.request.contextPath}/admin" class="nav-button">View Leave Requests</a>
     <a href="${pageContext.request.contextPath}/employees?action=add" class="button">Add Employee</a>

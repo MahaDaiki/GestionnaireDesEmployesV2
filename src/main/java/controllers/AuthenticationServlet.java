@@ -65,9 +65,6 @@ public class AuthenticationServlet extends HttpServlet {
         }
 
         switch (action) {
-            case "logout":
-                handleLogout(request, response);
-                break;
             case "dashboardadmin":
                 handleAdminDashboard(request, response);
                 break;
@@ -137,9 +134,9 @@ public class AuthenticationServlet extends HttpServlet {
             session.invalidate();
         }
 
-        request.setAttribute("message", "You have been logged out successfully.");
-        request.getRequestDispatcher("views/login.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/views/login.jsp");
     }
+
 
     private void handleAdminDashboard(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
@@ -177,6 +174,7 @@ public class AuthenticationServlet extends HttpServlet {
         }
     }
 
+
     private void handleCandidateDashboard(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         if (session != null && "CANDIDATE".equals(session.getAttribute("role"))) {
@@ -188,4 +186,5 @@ public class AuthenticationServlet extends HttpServlet {
             request.getRequestDispatcher("views/login.jsp").forward(request, response);
         }
     }
+
 }
