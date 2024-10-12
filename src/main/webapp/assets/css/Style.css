@@ -83,7 +83,7 @@ nav {
     padding: 20px;
     margin-right: 20px;
     border-right: 1px solid #ddd;
-
+    max-height: 500px;
 
 }
 
@@ -93,60 +93,69 @@ nav {
     margin: 10px 0;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #b0cfe3;
+    background-color: #f9f9f9;
 }
 
 .employee-card h3 {
     margin: 0 0 5px;
 }
 
-
+.form-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #d3d3d3;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 .input-group {
-    margin-bottom: 15px; /* Space between input groups */
+    margin-bottom: 15px;
 }
 
 .input-group label {
-    display: block; /* Block display for labels */
-    margin-bottom: 5px; /* Space below labels */
+    display: block;
+    margin-bottom: 5px;
 }
 
 .input-group input {
-    width: 100%; /* Full width of input */
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 4px; /* Rounded corners */
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 input[type="submit"] {
-    background-color: #007bff; /* Button background color */
-    color: white; /* Button text color */
+    background-color: #007bff;
+    color: white;
     border: none;
     padding: 10px;
-    border-radius: 5px; /* Rounded corners for button */
+    border-radius: 5px;
     cursor: pointer;
-    width: 100%; /* Make the button full width */
+    width: 100%;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3;
 }
 
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Stack elements on smaller screens */
+        flex-direction: column;
     }
 
     .employee-list {
-        margin-right: 0; /* Remove margin on small screens */
-        border-right: none; /* Remove border */
-        border-bottom: 2px solid #ddd; /* Add border below */
+        margin-right: 0;
+        border-right: none;
+        border-bottom: 2px solid #ddd;
     }
 
-
+    .form-container {
+        width: 100%;
+    }
 
     .employee-card {
-        padding: 15px; /* More padding for cards on small screens */
-        margin: 5px 0; /* Reduce margin for cards */
+        padding: 15px;
+        margin: 5px 0;
     }
 }

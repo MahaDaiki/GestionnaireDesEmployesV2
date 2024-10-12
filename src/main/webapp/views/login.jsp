@@ -21,8 +21,7 @@
 <div class="image-container"></div>
 
 
-<a href="employees?action=add" class="button">Add Employee</a>
-<a href="admin" class="nav-button">View Leave Requests</a>
+
 <div class="form-container">
     <div class="login-form">
         <h2>Login</h2>
